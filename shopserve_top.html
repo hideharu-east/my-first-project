@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ショップ名 - トップページ</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'メイリオ', sans-serif;
+      color: #333;
+      background: #fff;
+    }
+
+    /* ヘッダー */
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e0e0e0;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #c0392b;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 24px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      color: #c0392b;
+    }
+
+    .header-icons {
+      display: flex;
+      gap: 16px;
+      font-size: 14px;
+    }
+
+    .header-icons a {
+      text-decoration: none;
+      color: #333;
+    }
+
+    .header-icons a:hover {
+      color: #c0392b;
+    }
+
+    /* ヒーローバナー */
+    .hero {
+      background: linear-gradient(135deg, #f8f0e3 0%, #fde8d8 100%);
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+      color: #333;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 32px;
+    }
+
+    .hero-video-wrap {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto 36px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      aspect-ratio: 16 / 9;
+    }
+
+    .hero-video-wrap iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: #c0392b;
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #a93226;
+    }
+
+    /* カテゴリ */
+    .section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: #c0392b;
+      margin: 10px auto 0;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .category-card {
+      text-align: center;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .category-card .img-box {
+      background: #f5f5f5;
+      height: 140px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin-bottom: 10px;
+      transition: opacity 0.2s;
+    }
+
+    .category-card:hover .img-box {
+      opacity: 0.8;
+    }
+
+    .category-card span {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    /* 商品一覧 */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      text-decoration: none;
+      color: #333;
+      transition: box-shadow 0.2s;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+
+    .product-card .product-img {
+      background: #f9f9f9;
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+    }
+
+    .product-card .product-info {
+      padding: 14px;
+    }
+
+    .product-card .product-name {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .product-card .product-price {
+      font-size: 18px;
+      font-weight: bold;
+      color: #c0392b;
+    }
+
+    .product-card .product-price span {
+      font-size: 12px;
+      font-weight: normal;
+      color: #999;
+      margin-left: 4px;
+    }
+
+    /* バナー帯 */
+    .banner-strip {
+      background: #c0392b;
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .banner-strip h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .banner-strip p {
+      font-size: 14px;
+      margin-bottom: 24px;
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background: #fff;
+      color: #c0392b;
+      padding: 12px 32px;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: bold;
+      transition: opacity 0.2s;
+    }
+
+    .btn-secondary:hover {
+      opacity: 0.85;
+    }
+
+    /* フッター */
+    footer {
+      background: #222;
+      color: #aaa;
+      padding: 40px 20px 20px;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-brand .logo {
+      color: #fff;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-col ul li a {
+      text-decoration: none;
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .footer-col ul li a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #444;
+      padding-top: 20px;
+      text-align: center;
+      font-size: 12px;
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 24px; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヘッダー -->
+  <header>
+    <a href="#" class="logo">SHOP NAME</a>
+    <nav>
+      <a href="#">新着</a>
+      <a href="#">カテゴリ</a>
+      <a href="#">セール</a>
+      <a href="#">特集</a>
+      <a href="#">お問い合わせ</a>
+    </nav>
+    <div class="header-icons">
+      <a href="#">&#128269; 検索</a>
+      <a href="#">&#128100; マイページ</a>
+      <a href="#">&#128722; カート (0)</a>
+    </div>
+  </header>
+
+  <!-- ヒーローバナー -->
+  <section class="hero">
+    <h1>新生活をもっと豊かに</h1>
+    <p>こだわりの商品を、あなたのもとへお届けします</p>
+    <div class="hero-video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/YE7VzlLtp-4?autoplay=0&rel=0"
+        title="サンプル動画"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <a href="#" class="btn-primary">商品を見る</a>
+  </section>
+
+  <!-- カテゴリ -->
+  <div class="section">
+    <h2 class="section-title">カテゴリ</h2>
+    <div class="category-grid">
+      <a href="#" class="category-card">
+        <div class="img-box">&#128083;</div>
+        <span>ファッション</span>
+      </a>
+      <a href="#" class="category-card">
+        <div class="img-box">&#127968;</div>
+        <span>インテリア</span>
+      </a>
+      <a href="#" class="category-card">
+        <div class="img-box">&#127829;</div>
+        <span>グルメ</span>
+      </a>
+      <a href="#" class="category-card">
+        <div class="img-box">&#128138;</div>
+        <span>コスメ</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 新着商品 -->
+  <div class="section" style="padding-top: 0;">
+    <h2 class="section-title">新着商品</h2>
+    <div class="product-grid">
+      <a href="#" class="product-card">
+        <div class="product-img">&#128084;</div>
+        <div class="product-info">
+          <p class="product-name">シルクスカーフ（限定カラー）</p>
+          <p class="product-price">¥4,980<span>(税込)</span></p>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-img">&#127807;</div>
+        <div class="product-info">
+          <p class="product-name">アロマキャンドルセット</p>
+          <p class="product-price">¥2,480<span>(税込)</span></p>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-img">&#9749;</div>
+        <div class="product-info">
+          <p class="product-name">マグカップ（波佐見焼）</p>
+          <p class="product-price">¥3,200<span>(税込)</span></p>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-img">&#128202;</div>
+        <div class="product-info">
+          <p class="product-name">オーガニックスキンケアセット</p>
+          <p class="product-price">¥6,800<span>(税込)</span></p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- バナー帯 -->
+  <section class="banner-strip">
+    <h2>会員登録で10%OFF</h2>
+    <p>新規会員登録で、初回のご注文が10%オフになります。</p>
+    <a href="#" class="btn-secondary">今すぐ登録する</a>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">SHOP NAME</a>
+        <p>こだわりの商品を丁寧にセレクトし、<br>皆さまのもとへお届けしています。</p>
+      </div>
+      <div class="footer-col">
+        <h4>ショップ情報</h4>
+        <ul>
+          <li><a href="#">会社概要</a></li>
+          <li><a href="#">特定商取引法</a></li>
+          <li><a href="#">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>お買い物ガイド</h4>
+        <ul>
+          <li><a href="#">ご注文方法</a></li>
+          <li><a href="#">お支払い方法</a></li>
+          <li><a href="#">配送・送料</a></li>
+          <li><a href="#">返品・交換</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>サポート</h4>
+        <ul>
+          <li><a href="#">よくある質問</a></li>
+          <li><a href="#">お問い合わせ</a></li>
+          <li><a href="#">マイページ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SHOP NAME. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
